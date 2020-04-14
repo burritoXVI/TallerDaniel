@@ -1,0 +1,69 @@
+package cualquiera;
+
+import javax.swing.JOptionPane;
+
+
+public class Main  {
+
+
+public static void main (String[] args) throws NumberFormatException {
+		
+		int[] numeros = new int[10];
+		int acumulador = 0;
+		
+		//Bucle para insertar los datos a la matriz con excepcion NumberFormatException
+		
+		for(int i=0 ; i<numeros.length; i++) {	 
+
+			try {			
+				
+				numeros[i] = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite un nùmero para la matriz en la posicion ["+ (i+1) + "]: ", "Digitar numero", JOptionPane.OK_CANCEL_OPTION));
+				
+				acumulador += numeros[i];
+				
+			}catch (Exception e) {
+				
+				JOptionPane.showMessageDialog(null, "Error: Usted digito un valor que no es entero.");
+				
+			}
+		}
+		
+		//Calcular Moda
+		
+		int moda = 0;
+		int repeticiones = 0;
+		
+		for(int i=0 ; i<numeros.length; i++) {
+			int count = 0;
+			for(int j = 0; j<numeros.length; j++) {
+				if(numeros[i] == numeros[j]) {
+					count++;
+				}
+			}
+			
+			if(count > repeticiones) {
+				moda = numeros[i];
+				repeticiones = count;
+			}
+			
+		}
+		
+		//Imprimir promedio
+		
+		double promedio = acumulador / numeros.length;
+	
+		//Parte del codigo para mostrar los numeros, promedio y la moda
+		String str = "Los datos digitados fueron: ";
+		
+		for(int i=0 ; i<numeros.length; i++ ) {
+			
+			str += "\n" + numeros[i];
+
+		}
+		
+		JOptionPane.showMessageDialog(null, str);
+		
+		JOptionPane.showMessageDialog(null, "El numero que màs veces se repitio fue " + moda + " y se repitio "+repeticiones+" veces. \n El promedio es "+ promedio);
+	}
+
+}
