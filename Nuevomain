@@ -1,0 +1,75 @@
+
+package tallerdaniel;
+
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+
+
+public class Main  {
+
+
+    public static void main (String[] args) throws NumberFormatException {
+		
+		List <Integer> numeros = new ArrayList<>();
+		int acumulador = 0;
+		capturarDatos(numeros);
+                int moda = calcularModa(numeros); 
+                double promedio = calcularPromedio(numeros);
+                
+                //imprimir los datos
+                String str = "Los datos digitados fueron: ";
+                for(int i=0 ; i<numeros.size(); i++ ) {
+			str += "\n" + numeros.get(i);
+		}
+		JOptionPane.showMessageDialog(null, str);
+		JOptionPane.showMessageDialog(null, "El numero que se repitio màs veces fue " + moda + "\n El promedio es "+ promedio);
+                
+    }  
+ 
+    private static void capturarDatos(List <Integer> numeros){
+        int i = 0;
+        while(i<10){		  
+            try{
+            int num = 0;
+            num = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite un nùmero para agregar al ArrayList: ", "Digitar numero", JOptionPane.OK_CANCEL_OPTION));
+            numeros.add(num);          
+            i++;
+            }catch(NumberFormatException ex){
+                JOptionPane.showMessageDialog(null, "Error ha digitado un valor que no es numero entero!");
+                }
+            }
+                
+    }
+
+    //Metodo de calcular promedio
+    private static double calcularPromedio(List <Integer> numeros){
+        int acumulador = 0;
+        double promedio = 0.0;
+        for(int dato : numeros){
+            
+           acumulador += dato;
+        }
+        return promedio;
+    }
+    
+    //Metodo que calcula la moda
+    private static int calcularModa(List <Integer> numeros){
+        int moda = 0;
+        int repeticiones = 0;
+        for(int i=0 ; i<numeros.size(); i++) {
+			int count = 0;
+			for(int j = 0; j<numeros.size(); j++) {
+				if(numeros.get(i) == numeros.get(j)) {
+					count++;
+				}
+			}
+			if(count > repeticiones) {
+				moda = numeros.get(i);
+				repeticiones = count;
+			}
+		}
+        return moda;
+    }   
+
+}
